@@ -43,7 +43,7 @@ class NaoDialogflowDemo(SICApplication):
         super(NaoDialogflowDemo, self).__init__()
         
         # Demo-specific initialization
-        self.nao_ip = "XXX"
+        self.nao_ip = "10.0.0.181"
         self.google_keyfile_path = google_keyfile_path
         self.nao = None
         self.dialogflow = None
@@ -117,5 +117,5 @@ class NaoDialogflowDemo(SICApplication):
 
 if __name__ == "__main__":
     # Create and run the demo
-    demo = NaoDialogflowDemo(google_keyfile_path=abspath(join("..", "..", "conf", "google", "google-key.json")))
+    demo = NaoDialogflowDemo(google_keyfile_path=abspath(join("..", "..", "conf", "google", "sir-group-12-9a7af1d53a5f.json")))
     demo.run()
