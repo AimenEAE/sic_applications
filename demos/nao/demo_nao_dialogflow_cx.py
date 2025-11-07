@@ -52,8 +52,8 @@ class NaoDialogflowCXDemo(SICApplication):
         super(NaoDialogflowCXDemo, self).__init__()
         
         # Demo-specific initialization
-        self.nao_ip = "XXX"  # TODO: Replace with your NAO's IP address
-        self.dialogflow_keyfile_path = abspath(join("..", "..", "conf", "google", "google-key.json"))
+        self.nao_ip = "10.0.0.181"  # TODO: Replace with your NAO's IP address
+        self.dialogflow_keyfile_path = abspath(join("..", "..", "conf", "google", "sir-group-12-9a7af1d53a5f.json"))
         self.nao = None
         self.dialogflow_cx = None
         self.session_id = np.random.randint(10000)
@@ -87,7 +87,7 @@ class NaoDialogflowCXDemo(SICApplication):
         self.logger.info("Initializing NAO robot...")
         
         # Initialize NAO
-        self.nao = Nao(ip=self.nao_ip, dev_test=True)
+        self.nao = Nao(ip=self.nao_ip, dev_test=False)
         nao_mic = self.nao.mic
         
         self.logger.info("Initializing Dialogflow CX...")
@@ -98,8 +98,8 @@ class NaoDialogflowCXDemo(SICApplication):
         
         # Agent configuration
         # TODO: Replace with your agent details (use verify_dialogflow_cx_agent.py to find them)
-        agent_id = "XXX"  # Replace with your agent ID
-        location = "XXX"  # Replace with your agent location if different
+        agent_id = "f19dbc14-cbab-4ea2-8c91-ff7756966ab9"  # Replace with your agent ID
+        location = "europe-west4"  # Replace with your agent location if different
         
         # Create configuration for Dialogflow CX
         # Note: NAO uses 16000 Hz sample rate (not 44100 like desktop)
@@ -139,7 +139,7 @@ class NaoDialogflowCXDemo(SICApplication):
                     ))
                     
                     # Perform gestures based on detected intent (non-blocking)
-                    if reply.intent == "welcome_intent":
+                    if reply.intent == "small_talk.appraisal.welcome":
                         self.logger.info("Welcome intent detected - performing wave gesture")
                         # Use send_message for non-blocking gesture execution
                         # This allows the TTS to speak while the gesture is performed
@@ -159,7 +159,7 @@ class NaoDialogflowCXDemo(SICApplication):
                     self.nao.tts.request(NaoqiTextToSpeechRequest(text))
                 else:
                     self.logger.info("No fulfillment message")
-                
+                    self.nao.tts.request(NaoqiTextToSpeechRequest(f"Sorry i don't understand that"))
                 # Log any parameters
                 if reply.parameters:
                     self.logger.info("Parameters: {params}".format(params=reply.parameters))

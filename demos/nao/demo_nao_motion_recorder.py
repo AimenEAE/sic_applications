@@ -87,8 +87,19 @@ class NaoMotionRecorderDemo(SICApplication):
         finally:
             self.shutdown()
 
+    def run_again(self):
+        """Run the demo again."""
+        try:
+            self.logger.info("Running the demo again...")
+            self.run()
+        except Exception as e:
+            self.logger.error("Exception: {}".format(e=e))
+        finally:
+            self.shutdown()
+
 
 if __name__ == "__main__":
     # Create and run the demo
     demo = NaoMotionRecorderDemo()
     demo.run()
+    demo.run_again()

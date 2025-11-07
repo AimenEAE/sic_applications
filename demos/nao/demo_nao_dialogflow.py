@@ -7,6 +7,13 @@ from sic_framework.devices import Nao
 from sic_framework.devices.nao_stub import NaoStub
 from sic_framework.devices.nao import NaoqiTextToSpeechRequest
 
+
+# Import message types and requests
+from sic_framework.devices.common_naoqi.naoqi_motion import (
+    NaoPostureRequest,
+    NaoqiAnimationRequest,
+)
+
 # Import the service(s) we will be using
 from sic_framework.services.dialogflow.dialogflow import (
     Dialogflow,
@@ -109,6 +116,11 @@ class NaoDialogflowDemo(SICApplication):
                     text = reply.fulfillment_message
                     self.logger.info("Reply: {}".format(text))
                     self.nao.tts.request(NaoqiTextToSpeechRequest(text))
+                if reply.intent == "good_morning":
+                    self.nao.motion.request(NaoqiAnimationRequest("animations/Stand/Gestures/Hey_1"))
+                else:
+                    self.nao.tts.request(NaoqiTextToSpeechRequest(f"Sorry i don't understand that"))
+
         except Exception as e:
             self.logger.error("Exception: {}".format(e=e))
         finally:
