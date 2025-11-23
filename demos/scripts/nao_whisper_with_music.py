@@ -19,7 +19,7 @@ import os
 # Note: Install with: pip install openai
 try:
     from openai import OpenAI
-    client = OpenAI(api_key="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")
+    client = OpenAI(api_key="your_api_key")
 except ImportError as e:
     print("Missing dependencies. Install with: pip install openai")
     raise e
